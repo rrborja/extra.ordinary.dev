@@ -1,0 +1,9 @@
+{
+  "apps": [
+      {
+          "name": "extra-ordinary-dev",
+          "script": "npm",
+          "args": "run start"
+      }
+  ]
+}
