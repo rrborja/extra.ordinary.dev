@@ -25,9 +25,9 @@ jobs:
       - install
       - run: npm run build 
       - persist_to_workspace:
-        root: .
-        paths:
-          - build
+          root: .
+          paths:
+            - build
   deploy:
     docker:
       - image: google/cloud-sdk
