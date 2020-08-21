@@ -1,13 +1,28 @@
 version: 2.1
-orbs:
-  node: circleci/node@4.0.0
+executors:
+  node:
+    docker:
+      - image: circleci/node:8.15
+commands:
+  install:
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - node_modules-2-{{ checksum "package.json" }}-{{ checksum "package-lock.json"}}
+          - node_modules-2-{{ checksum "package.json" }}
+          - node_modules-2-
+      - run: npm ci
+      - save_cache:
+          paths:
+            - $HOME/.npm
+          key: node_modules-2-{{ checksum "package.json" }}-{{ checksum "package-lock.json"}}
 jobs:
   build:
     working_directory: ~/homepage
-    executor: node/default
+    executor: node
     steps:
-      - checkout
-      - node/install
+      - install
       - run: npm run build   
 workflows:
   build-homepage:
