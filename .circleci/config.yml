@@ -32,6 +32,7 @@ jobs:
     docker:
       - image: google/cloud-sdk
     steps:
+      - run: ls -al
       - attach_workspace:
           at: /tmp/workspace
       - run: |
@@ -43,4 +44,6 @@ workflows:
   build-homepage:
     jobs:
       - build
-      - deploy
+      - deploy:
+          requires:
+            - build
