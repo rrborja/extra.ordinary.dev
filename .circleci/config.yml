@@ -23,7 +23,22 @@ jobs:
     executor: node
     steps:
       - install
-      - run: npm run build   
+      - run: npm run build 
+      - persist_to_workspace:
+        root: .
+        paths:
+          - build
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: |
+          echo $GCLOUD_SERVICE_KEY >> /tmp/key.json
+          gcloud auth activate-service-account --key-file=/tmp/key.json
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          gsutil cp -r /tmp/workspace/public/. gs://${BUCKET_NAME}
 workflows:
   build-homepage:
     jobs:
