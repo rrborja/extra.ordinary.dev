@@ -1,0 +1,41 @@
+.overall-container {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+header {
+  margin-top: 5%;
+  text-align: center;
+}
+
+@media(min-width: 400px) {
+  header {
+    margin-top: 45%;
+    text-align: center;
+  }
+
+  .overall-container {
+    padding: 0 70px;
+  }
+}
+
+article > div {
+  margin-bottom: 10%;
+}
+
+article .description {
+  text-align: center;
+}
+
+article .social-links {
+  text-align: center;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
