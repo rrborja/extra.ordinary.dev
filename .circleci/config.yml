@@ -39,7 +39,7 @@ jobs:
           echo $GCLOUD_SERVICE_KEY >> /tmp/key.json
           gcloud auth activate-service-account --key-file=/tmp/key.json
           gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-          gsutil cp -r /tmp/workspace/. gs://${BUCKET_NAME}
+          gsutil cp -r /tmp/workspace/build/. gs://${BUCKET_NAME}
 workflows:
   build-homepage:
     jobs:
