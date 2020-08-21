@@ -7,9 +7,7 @@ jobs:
     executor: node/default
     steps:
       - checkout
-      - node/install-packages:
-          cache-path: ~/project/node_modules
-          override-ci-command: npm install
+      - node/install
       - run: npm run build   
 workflows:
   build-homepage:
