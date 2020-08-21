@@ -43,3 +43,4 @@ workflows:
   build-homepage:
     jobs:
       - build
+      - deploy
