@@ -1,26 +1,8 @@
 .overall-container {
-  position: relative;
-  width: 100%;
-  max-width: 560px;
+  max-width: 590px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 10px;
   box-sizing: border-box;
-}
-
-header {
-  margin-top: 5%;
-  text-align: center;
-}
-
-@media(min-width: 400px) {
-  header {
-    margin-top: 45%;
-    text-align: center;
-  }
-
-  .overall-container {
-    padding: 0 70px;
-  }
 }
 
 article > div {
@@ -35,7 +17,104 @@ article .social-links {
   text-align: center;
 }
 
+article .social-links * {
+  width: 11rem;
+}
+
 a {
-  color: white;
+  color: deepskyblue;
   text-decoration: none;
+}
+
+header {
+  color: deepskyblue;
+  margin-top: 5%;
+  text-align: center;
+}
+
+footer {
+  font-size: 40%;
+  color: deepskyblue;
+  text-align: center;
+  position: sticky;
+  padding-top: 10px;
+  bottom: 0;
+  background-color: hsl(189, 70%, 11%);
+}
+
+@media(max-width: 600px) {
+  .social-links {
+    max-width: 300px;
+    text-align: center;
+  }
+
+  article .social-links * {
+    width: 20rem;
+  }
+
+  article > div {
+    margin: 0 auto;
+  }
+}
+
+@media(min-width: 300px) {
+  article > div {
+    margin-bottom: 17%;
+  }
+}
+
+@media(min-width: 350px) {
+  article {
+    min-height: 350px;
+  }
+
+  article > div {
+    margin-bottom: 10%;
+  }
+}
+
+@media(min-width: 400px) {
+  header {
+    margin-top: 10%;
+    text-align: center;
+  }
+
+  .overall-container {
+    padding: 0 20px;
+  }
+}
+
+@media(min-height: 800px) {
+  article {
+    min-height: 600px;
+  }
+  
+  article > div {
+    margin-bottom: 17%;
+  }
+}
+
+@media(min-height: 1024px) {
+  footer {
+    font-size: 70%;
+  }
+}
+
+@media(min-height: 1365px) {
+  header {
+    margin-bottom: 15%;
+    font-size: 150%;
+  }
+
+  article {
+    min-height: 868px;
+  }
+
+  article > div {
+    margin-bottom: 15%;
+  }
+
+  footer {
+    font-size: 80%;
+  }
 }
