@@ -4,6 +4,7 @@ import Homepage from './Homepage';
 import './index.css';
 import * as serviceWorker from './utils/serviceWorker';
 import AnalyticsProvider from './store/analytics';
+import './importantMessage';
 
 ReactDOM.render(
     <React.StrictMode>
