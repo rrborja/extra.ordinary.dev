@@ -4,6 +4,13 @@ import _capitalize from 'lodash/capitalize';
 import _isEmpty from 'lodash/isEmpty';
 import reducerCreator from './reducerCreator';
 
+/**
+ * Constructs the closure for useContext
+ * @param {string} name name of the context
+ * @param {string} type context type of the context either State or Dispatch
+ * @param {React.Context} context object within the context provider
+ * @return {Function} the useContext hook
+ */
 export function useContextClosure(name, type, context) {
   return function useContextClosure() {
     const initializedContext = useContext(context);
@@ -15,6 +22,12 @@ export function useContextClosure(name, type, context) {
   };
 }
 
+/**
+ * Constructs the closure for the useState hook
+ * @param {string} identifier name of the state field
+ * @param {React.Context} stateContext context of the state
+ * @return {Function} the useState hook
+ */
 export function useStateClosure(identifier, stateContext) {
   const hookName = `use${identifier}State`;
   return {
@@ -22,6 +35,12 @@ export function useStateClosure(identifier, stateContext) {
   };
 }
 
+/**
+ * Constructs the closure for the useDispatch hook
+ * @param {string} identifier name of the method
+ * @param {React.Context} dispatchContext context of the dispatch
+ * @return {Function} the useDispatch hook
+ */
 export function useDispatchClosure(identifier, dispatchContext) {
   const hookName = `use${identifier}Dispatch`;
   return {
@@ -29,6 +48,12 @@ export function useDispatchClosure(identifier, dispatchContext) {
   };
 }
 
+/**
+ * Constructs the dispatch methods
+ * @param {Array} actionStructure the state's field names
+ * @param {Function} dispatchAction the dispatch callback function
+ * @return {Map} the dictionary of dispatch methods
+ */
 export function dispatchTransformer(actionStructure = [], dispatchAction) {
   return actionStructure.reduce(
       (acc, type) => ({
@@ -37,8 +62,15 @@ export function dispatchTransformer(actionStructure = [], dispatchAction) {
       }), {});
 }
 
+/**
+ * Constructs the useContext hook
+ * @param {string} name name of the context
+ * @param {Map} initialState The key-value of the initial state
+ * @param {Map} actions The key-value of the methods for mutating the state
+ * @return {Readonly<Object>} returns the three helper function of the context
+ */
 export default function useContextCreator(
-    name= '',
+    name = '',
     initialState = {},
     actions = {},
 ) {

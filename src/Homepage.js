@@ -34,33 +34,27 @@ const links = Object.freeze([
   },
 ]);
 
-export function getUserId() {
-  let userId = localStorage.getItem('USER_ID');
-
-  if (userId == null) {
-    userId = uuidv4();
-    localStorage.setItem('USER_ID', userId);
-  }
-
-  return userId;
-}
-
-export default function Homepage() {
-  const {trackingId} = useAnalyticsState();
-  const userId = getUserId();
-  const pathName = window.location.pathname;
-  const urlQueryString = window.location.search;
-
-  useEffect(() => {
-    analyticsInitializer(trackingId, userId);
-    analyticsPageView(pathName + urlQueryString);
-  }, [trackingId, userId, pathName, urlQueryString]);
-
+/**
+ * Component for defining the header of the homepage
+ * @return {JSX.Element} the header fragment
+ */
+function Header() {
   return (
-    <div className="overall-container">
+    <React.Fragment>
       <header>
         <h1>Ritchie Borja</h1>
       </header>
+    </React.Fragment>
+  );
+}
+
+/**
+ * Component for defining the article body of the homepage
+ * @return {JSX.Element} the body fragment
+ */
+function Body() {
+  return (
+    <React.Fragment>
       <article>
         <div className="description">
           Hi! I recently got this domain and I am on the verge of finishing
@@ -84,21 +78,72 @@ export default function Homepage() {
           )}
         </div>
       </article>
-      <footer>
-        <div>
-          {!versionText || versionText.length === 0 ?
-            'If you are reading this, that means CircleCI did not update ' +
-            'this line.' : versionText[0]}
-        </div>
-        <div>
-          <a
-            href="https://github.com/rrborja/extra.ordinary.dev"
-            onClick={() => analytics.homepageSourceCodeClickedLink()}
-          >
-            Click here
-          </a> to access the source code of this page.
-        </div>
-      </footer>
+    </React.Fragment>
+  );
+}
+
+/**
+ * Component for defining the footer of the homepage
+ * @return {JSX.Element} the footer fragment
+ */
+function Footer() {
+  return (
+    <footer>
+      <div>
+        {!versionText || versionText.length === 0 ?
+          'If you are reading this, that means CircleCI did not update ' +
+          'this line.' : versionText[0]}
+      </div>
+      <div>
+        <a
+          href="https://github.com/rrborja/extra.ordinary.dev"
+          onClick={() => analytics.homepageSourceCodeClickedLink()}
+        >
+          Click here
+        </a> to access the source code of this page.
+      </div>
+    </footer>
+  );
+}
+
+/**
+ * Gets the Unique User ID from the browser for tracking purposes
+ *
+ * If the browser does not contain the Unique User ID, a value will be
+ * generated as a UUID v4
+ * @return {string} the UUID of the user
+ */
+export function getUserId() {
+  let userId = localStorage.getItem('USER_ID');
+
+  if (userId == null) {
+    userId = uuidv4();
+    localStorage.setItem('USER_ID', userId);
+  }
+
+  return userId;
+}
+
+/**
+ * Component that sets the main structure of the homepage
+ * @return {JSX.Element} the homepage component
+ */
+export default function Homepage() {
+  const {trackingId} = useAnalyticsState();
+  const userId = getUserId();
+  const pathName = window.location.pathname;
+  const urlQueryString = window.location.search;
+
+  useEffect(() => {
+    analyticsInitializer(trackingId, userId);
+    analyticsPageView(pathName + urlQueryString);
+  }, [trackingId, userId, pathName, urlQueryString]);
+
+  return (
+    <div className="overall-container">
+      <Header/>
+      <Body/>
+      <Footer/>
     </div>
   );
 }

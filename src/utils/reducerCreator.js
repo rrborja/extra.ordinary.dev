@@ -1,4 +1,10 @@
-export default function reducerCreator(name, actions) {
+/**
+ * Creates the closure for the useReducer hook
+ * @param {string} name name of the context
+ * @param {Map} actions the dictionary of dispatch methods
+ * @return {Function} the closure of the useReducer
+ */
+export default function reducerCreator(name = '', actions = {}) {
   return (state, {type, payload}) => {
     if (state === undefined || state === null) {
       throw new Error(`state object must be defined for the store ${name}`);

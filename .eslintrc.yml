@@ -4,6 +4,9 @@ env:
 extends:
   - 'plugin:react/recommended'
   - google
+settings:
+  react:
+    version: detect
 parserOptions:
   ecmaFeatures:
     jsx: true
