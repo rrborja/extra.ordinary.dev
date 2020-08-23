@@ -1,5 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
+
+import analyticsInitializer from './analytics/analyticsInitializer';
+import analyticsPageView from './analytics/analyticsPageView';
+import { SocialLinkEvent, HomepageSourceCodeClickedLink } from './analytics/analyticsEvents';
+import { useAnalyticsState } from './store/analytics';
 import versionText from './static-version-text.json';
 import './homepage.css';
 
@@ -28,7 +34,28 @@ const links = Object.freeze([
   },
 ]);
 
+export function getUserId() {
+  let userId = localStorage.getItem('USER_ID');
+  
+  if (userId == null) {
+    userId = uuidv4();
+    localStorage.setItem('USER_ID', userId);
+  }
+
+  return userId;
+}
+
 export default function Homepage() {
+  const { trackingId } = useAnalyticsState();
+  const userId = getUserId();
+  const pathName = window.location.pathname;
+  const urlQueryString = window.location.search;
+
+  useEffect(() => {
+    analyticsInitializer(trackingId, userId);
+    analyticsPageView(pathName + urlQueryString);
+  }, [trackingId, userId, pathName, urlQueryString]);
+
   return (
     <div className="overall-container">
       <header>
@@ -42,7 +69,15 @@ export default function Homepage() {
           a software engineer in Philadelphia, PA. Feel free to check out the links below.
         </div>
         <div className="social-links">
-          {links.map(({ label, linkTo }, i) => <Button href={linkTo}>{label}</Button>)}
+          {links.map(({ label, linkTo }, i) => 
+            <Button 
+              key={`social-link-${i}`} 
+              onClick={() => SocialLinkEvent(label)} 
+              href={linkTo}
+            >
+              {label}
+            </Button>
+          )}
         </div>
       </article>
       <footer>
@@ -52,7 +87,12 @@ export default function Homepage() {
             : versionText[0]}
         </div>
         <div>
-          <a href="https://github.com/rrborja/extra.ordinary.dev">Click here</a> to access the source code of this page.
+          <a 
+            href="https://github.com/rrborja/extra.ordinary.dev" 
+            onClick={() => HomepageSourceCodeClickedLink()}
+          >
+            Click here
+          </a> to access the source code of this page.
         </div>
       </footer>
     </div>

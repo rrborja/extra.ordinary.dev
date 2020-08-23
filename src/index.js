@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import Homepage from './Homepage';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
+import AnalyticsProvider from './store/analytics';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Homepage />
+    <AnalyticsProvider>
+      <Homepage />
+    </AnalyticsProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
