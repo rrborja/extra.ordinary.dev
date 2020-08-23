@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import analyticsInitializer from './analytics/analyticsInitializer';
 import analyticsPageView from './analytics/analyticsPageView';
-import { SocialLinkEvent, HomepageSourceCodeClickedLink } from './analytics/analyticsEvents';
+import * as analytics from './analytics/analyticsEvents';
 import { useAnalyticsState } from './store/analytics';
 import versionText from './static-version-text.json';
 import './homepage.css';
@@ -72,7 +72,7 @@ export default function Homepage() {
           {links.map(({ label, linkTo }, i) => 
             <Button 
               key={`social-link-${i}`} 
-              onClick={() => SocialLinkEvent(label)} 
+              onClick={() => analytics.SocialLinkEvent(label)} 
               href={linkTo}
             >
               {label}
@@ -89,7 +89,7 @@ export default function Homepage() {
         <div>
           <a 
             href="https://github.com/rrborja/extra.ordinary.dev" 
-            onClick={() => HomepageSourceCodeClickedLink()}
+            onClick={() => analytics.HomepageSourceCodeClickedLink()}
           >
             Click here
           </a> to access the source code of this page.

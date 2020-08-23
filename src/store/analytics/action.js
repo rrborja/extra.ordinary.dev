@@ -1,5 +1,9 @@
-import simpleMutationDispatch from '../../utils/simpleMutationDispatch';
+import { simpleMutationDispatchWithPreprocessor } from '../../utils/simpleMutationDispatch';
 
 export default Object.freeze({
-  updateTrackingId: simpleMutationDispatch,
+  updateTrackingId: trackingId => simpleMutationDispatchWithPreprocessor(() => {
+      if (typeof trackingId !== 'string') {
+        throw new Error('Tracking ID must be a string');
+      }
+    }, { trackingId }),
 });

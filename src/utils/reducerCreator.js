@@ -1,5 +1,5 @@
 export default function reducerCreator(name, actions) {
-  return (state, {type, item}) => {
+  return (state, {type, payload}) => {
     if (state === undefined || state === null) {
       throw new Error(`state object must be defined for the store ${name}`);
     }
@@ -14,6 +14,6 @@ export default function reducerCreator(name, actions) {
       throw new Error(`Invalid action type ${type}`);
     }
 
-    action(item)(state);
+    return action(payload)(state);
   };
 }
