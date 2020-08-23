@@ -11,7 +11,7 @@ export function simpleMutationDispatchWithPreprocessor(preprocess, args) {
     preprocess();
   }
 
-  return state => ({
+  return (state) => ({
     ...state,
     ...args,
   });

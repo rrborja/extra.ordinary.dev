@@ -28,6 +28,7 @@ jobs:
       - run: 
           name: Apply new update date on footer page
           command: echo [\"This page was updated on $(date)\"] > ./src/static-version-text.json
+      - run: npm run pretest
       - run: npm run build 
       - persist_to_workspace:
           root: .

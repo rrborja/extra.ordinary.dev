@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 
 import analyticsInitializer from './analytics/analyticsInitializer';
 import analyticsPageView from './analytics/analyticsPageView';
 import * as analytics from './analytics/analyticsEvents';
-import { useAnalyticsState } from './store/analytics';
+import {useAnalyticsState} from './store/analytics';
 import versionText from './static-version-text.json';
 import './homepage.css';
 
@@ -36,7 +36,7 @@ const links = Object.freeze([
 
 export function getUserId() {
   let userId = localStorage.getItem('USER_ID');
-  
+
   if (userId == null) {
     userId = uuidv4();
     localStorage.setItem('USER_ID', userId);
@@ -46,7 +46,7 @@ export function getUserId() {
 }
 
 export default function Homepage() {
-  const { trackingId } = useAnalyticsState();
+  const {trackingId} = useAnalyticsState();
   const userId = getUserId();
   const pathName = window.location.pathname;
   const urlQueryString = window.location.search;
@@ -63,33 +63,37 @@ export default function Homepage() {
       </header>
       <article>
         <div className="description">
-          Hi! I recently got this domain and I am on the verge of finishing this website
-          but for now, I'll just give you a simple one until I make something
-          <a href="https://extra.ordinary.dev"> <strong>extraordinary</strong></a>. I am
-          a software engineer in Philadelphia, PA. Feel free to check out the links below.
+          Hi! I recently got this domain and I am on the verge of finishing
+          this website but for now, I&apos;ll just give you a simple one until
+          I make something
+          <a href="https://extra.ordinary.dev">
+            <strong> extraordinary</strong>
+          </a>
+          . I am a software engineer in Philadelphia, PA. Feel free to check
+          out the links below.
         </div>
         <div className="social-links">
-          {links.map(({ label, linkTo }, i) => 
-            <Button 
-              key={`social-link-${i}`} 
-              onClick={() => analytics.SocialLinkEvent(label)} 
+          {links.map(({label, linkTo}, i) =>
+            <Button
+              key={`social-link-${i}`}
+              onClick={() => analytics.socialLinkEvent(label)}
               href={linkTo}
             >
               {label}
-            </Button>
+            </Button>,
           )}
         </div>
       </article>
       <footer>
         <div>
           {!versionText || versionText.length === 0 ?
-            'If you are reading this, that means CircleCI did not update this line.'
-            : versionText[0]}
+            'If you are reading this, that means CircleCI did not update ' +
+            'this line.' : versionText[0]}
         </div>
         <div>
-          <a 
-            href="https://github.com/rrborja/extra.ordinary.dev" 
-            onClick={() => analytics.HomepageSourceCodeClickedLink()}
+          <a
+            href="https://github.com/rrborja/extra.ordinary.dev"
+            onClick={() => analytics.homepageSourceCodeClickedLink()}
           >
             Click here
           </a> to access the source code of this page.

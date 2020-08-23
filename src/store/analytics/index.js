@@ -2,9 +2,9 @@ import useContextCreator from '../../utils/contextCreator';
 import initialState from './state';
 import dispatchActions from './action';
 
-const { 
+const {
   Provider: AnalyticsProvider,
-  useAnalyticsState, 
+  useAnalyticsState,
   useAnalyticsDispatch,
 } = useContextCreator('Analytics', initialState, dispatchActions);
 
@@ -12,4 +12,4 @@ export default AnalyticsProvider;
 export {
   useAnalyticsState,
   useAnalyticsDispatch,
-}
+};

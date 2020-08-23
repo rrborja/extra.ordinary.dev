@@ -6,12 +6,12 @@ import * as serviceWorker from './utils/serviceWorker';
 import AnalyticsProvider from './store/analytics';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <AnalyticsProvider>
-      <Homepage />
-    </AnalyticsProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+      <AnalyticsProvider>
+        <Homepage />
+      </AnalyticsProvider>
+    </React.StrictMode>,
+    document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change
