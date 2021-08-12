@@ -32,6 +32,14 @@ const links = Object.freeze([
     label: 'Keybase',
     linkTo: 'https://keybase.io/brute',
   },
+  {
+    label: 'YouTube',
+    linkTo: 'https://www.youtube.com/channel/UCERY5ttwgxhBq4vWS33K6Bw',
+  },
+  {
+    label: 'Destiny 2 Raid Reports',
+    linkTo: 'https://raid.report/ps/TuringMachines',
+  },
 ]);
 
 /**
@@ -43,6 +51,7 @@ function Header() {
     <React.Fragment>
       <header>
         <h1>Ritchie Borja</h1>
+        <h5>he / him</h5>
       </header>
     </React.Fragment>
   );
@@ -57,14 +66,9 @@ function Body() {
     <React.Fragment>
       <article>
         <div className="description">
-          Hi! I recently got this domain and I am on the verge of finishing
-          this website but for now, I&apos;ll just give you a simple one until
-          I make something
-          <a href="https://extra.ordinary.dev">
-            <strong> extraordinary</strong>
-          </a>
-          . I am a software engineer in Philadelphia, PA. Feel free to check
-          out the links below.
+          I am a software engineer and a PC/Console gamer based in
+          <a href="https://www.google.com/maps/place/Philadelphia,+PA"> Philadelphia, PA</a>.
+          Feel free to check out the links below.
         </div>
         <div className="social-links">
           {links.map(({label, linkTo}, i) =>
