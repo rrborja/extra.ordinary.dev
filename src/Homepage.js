@@ -38,7 +38,7 @@ const links = Object.freeze([
   },
   {
     label: 'Destiny 2 Raid Reports',
-    linkTo: 'https://raid.report/ps/TuringMachines',
+    linkTo: 'https://raid.report/ps/4611686018487948427',
   },
 ]);
 
