@@ -14,9 +14,9 @@ const Button = styled.a`
   border-radius: 3px;
   padding: 0.5rem 0;
   margin: 0.5rem 1rem;
-  background: deepskyblue;
+  background: #34568b;
   color: white;
-  border: 2px solid deepskyblue;
+  border: 2px solid #34568b;
 `;
 
 const links = Object.freeze([
@@ -29,12 +29,16 @@ const links = Object.freeze([
     linkTo: 'https://www.linkedin.com/in/ritchieborja',
   },
   {
-    label: 'Keybase',
-    linkTo: 'https://keybase.io/brute',
+    label: 'Twitter',
+    linkTo: 'https://www.twitter.com/ritchieborja',
   },
   {
     label: 'YouTube',
     linkTo: 'https://www.youtube.com/channel/UCERY5ttwgxhBq4vWS33K6Bw',
+  },
+  {
+    label: 'Keybase',
+    linkTo: 'https://keybase.io/brute',
   },
   {
     label: 'Destiny 2 Raid Reports',
@@ -66,9 +70,11 @@ function Body() {
     <React.Fragment>
       <article>
         <div className="description">
-          I am a software engineer and a PC/Console gamer based in
+          I am a software engineer in
           <a href="https://www.google.com/maps/place/Philadelphia,+PA"> Philadelphia, PA</a>.
-          Feel free to check out the links below.
+          I play the piano most of my free time.
+          <a href="https://phish.com">Ph</a>eel free to check out the links below.
+          As always, opinions are my own.
         </div>
         <div className="social-links">
           {links.map(({label, linkTo}, i) =>
@@ -103,8 +109,8 @@ function Footer() {
           href="https://github.com/rrborja/extra.ordinary.dev"
           onClick={() => analytics.homepageSourceCodeClickedLink()}
         >
-          Click here
-        </a> to access the source code of this page.
+          Click/tap here
+        </a> so you know how I designed this page.
       </div>
     </footer>
   );

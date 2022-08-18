@@ -23,12 +23,12 @@ article .social-links * {
 }
 
 a {
-  color: deepskyblue;
+  color: rgb(175, 238, 255);
   text-decoration: none;
 }
 
 header {
-  color: deepskyblue;
+  color: #34568b;
   margin-top: 5%;
   text-align: center;
   margin-bottom: 20px;
@@ -40,14 +40,15 @@ header * {
 
 footer {
   font-size: 40%;
-  color: deepskyblue;
+  color: white;
   text-align: center;
   position: fixed;
   padding-top: 10px;
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: hsl(189, 70%, 11%);
+  color: #34568b;
+  background-color: #45b8ac;
 }
 
 @media(max-width: 600px) {

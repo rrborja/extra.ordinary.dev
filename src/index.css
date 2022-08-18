@@ -1,10 +1,14 @@
 body {
-  background-color: hsl(189, 70%, 11%);
-  color: #fff;
+  background-color: #45b8ac;
+  color: #34568b;
   font-size: 1.5em;
   line-height: 1.6;
   font-weight: 400;
-  font-family: Arial, sans-serif;
+  font-family: 'Viga', sans-serif;
+}
+
+a {
+  padding-left: 3px;
 }
 
 html {
