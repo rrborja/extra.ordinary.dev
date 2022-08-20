@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {v4 as uuidv4} from 'uuid';
 
@@ -18,33 +18,6 @@ const Button = styled.a`
   color: white;
   border: 2px solid #34568b;
 `;
-
-const links = Object.freeze([
-  {
-    label: 'GitHub',
-    linkTo: 'https://github.com/rrborja',
-  },
-  {
-    label: 'LinkedIn',
-    linkTo: 'https://www.linkedin.com/in/ritchieborja',
-  },
-  {
-    label: 'Twitter',
-    linkTo: 'https://www.twitter.com/ritchieborja',
-  },
-  {
-    label: 'YouTube',
-    linkTo: 'https://www.youtube.com/channel/UCERY5ttwgxhBq4vWS33K6Bw',
-  },
-  {
-    label: 'Keybase',
-    linkTo: 'https://keybase.io/brute',
-  },
-  {
-    label: 'Destiny 2 Raid Reports',
-    linkTo: 'https://raid.report/ps/4611686018487948427',
-  },
-]);
 
 /**
  * Component for defining the header of the homepage
@@ -66,6 +39,18 @@ function Header() {
  * @return {JSX.Element} the body fragment
  */
 function Body() {
+  const [links, setLinks] = useState([]);
+
+  useEffect(() => {
+    fetch('https://firestore.googleapis.com/v1/projects/extra-ordinary-dev/databases/(default)/documents/social-links?orderBy=order')
+        .then((response) => response.json())
+        .then(({documents}) => documents.map(({fields}) => ({
+          label: fields.label?.stringValue,
+          linkTo: fields.linkTo?.stringValue,
+        })))
+        .then(setLinks);
+  }, []);
+
   return (
     <React.Fragment>
       <article>
