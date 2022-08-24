@@ -9,6 +9,14 @@ article > div {
   margin-bottom: 10%;
 }
 
+article .live-player-content h6 {
+  margin: 0;
+  text-align: center;
+  font-size: small;
+  font-weight: 100;
+  color: rgb(0, 82, 0);
+}
+
 article .description {
   text-align: center;
 }
@@ -99,7 +107,7 @@ footer {
   }
   
   article > div {
-    margin-bottom: 17%;
+    margin-bottom: 7%;
   }
 }
 

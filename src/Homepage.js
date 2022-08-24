@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, Suspense} from 'react';
 import styled from 'styled-components';
 import {v4 as uuidv4} from 'uuid';
 
@@ -18,6 +18,8 @@ const Button = styled.a`
   color: white;
   border: 2px solid #34568b;
 `;
+
+const YoutubeEmbed = React.lazy(() => import('./components/YoutubeEmbed'));
 
 /**
  * Component for defining the header of the homepage
@@ -40,6 +42,7 @@ function Header() {
  */
 function Body() {
   const [links, setLinks] = useState([]);
+  const [liveVideo, setLiveVideo] = useState(null);
 
   useEffect(() => {
     fetch('https://firestore.googleapis.com/v1/projects/extra-ordinary-dev/databases/(default)/documents/social-links?orderBy=order')
@@ -49,6 +52,15 @@ function Body() {
           linkTo: fields.linkTo?.stringValue,
         })))
         .then(setLinks);
+    fetch('https://firestore.googleapis.com/v1/projects/extra-ordinary-dev/databases/(default)/documents/live-video/default')
+        .then((response) => response.json())
+        .then(({fields}) => ({
+          title: fields.title?.stringValue,
+          embedId: fields.embedId?.stringValue,
+          caption: fields.caption?.stringValue,
+          display: fields.display?.booleanValue,
+        }))
+        .then(setLiveVideo);
   }, []);
 
   return (
@@ -61,6 +73,15 @@ function Body() {
           <a href="https://phish.com">Ph</a>eel free to check out the links below.
           As always, opinions are my own.
         </div>
+        {liveVideo?.display && (
+          <Suspense fallback={<div>Now streaming...</div>}>
+            <YoutubeEmbed
+              title={liveVideo.title}
+              embedId={liveVideo.embedId}
+              caption={liveVideo.caption}
+            />
+          </Suspense>
+        )}
         <div className="social-links">
           {links.map(({label, linkTo}, i) =>
             <Button

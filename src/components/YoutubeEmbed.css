@@ -1,0 +1,12 @@
+.video-player {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.video-player iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
