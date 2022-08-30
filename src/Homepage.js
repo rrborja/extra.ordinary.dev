@@ -50,6 +50,7 @@ function Body() {
         .then(({documents}) => documents.map(({fields}) => ({
           label: fields.label?.stringValue,
           linkTo: fields.linkTo?.stringValue,
+          display: fields.display?.booleanValue,
         })))
         .then(setLinks);
     fetch('https://firestore.googleapis.com/v1/projects/extra-ordinary-dev/databases/(default)/documents/live-video/default')
@@ -83,8 +84,8 @@ function Body() {
           </Suspense>
         )}
         <div className="social-links">
-          {links.map(({label, linkTo}, i) =>
-            <Button
+          {links.map(({label, linkTo, display}, i) =>
+            display && <Button
               key={`social-link-${i}`}
               onClick={() => analytics.socialLinkEvent(label)}
               href={linkTo}
