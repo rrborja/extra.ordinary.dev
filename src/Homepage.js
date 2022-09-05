@@ -47,30 +47,17 @@ function Body() {
   const [currentlyPlaying, setCurrentlyPlaying] = useState(null);
 
   useEffect(() => {
-    fetch('https://firestore.googleapis.com/v1/projects/extra-ordinary-dev/databases/(default)/documents/social-links?orderBy=order')
+    fetch('https://us-central1-extra-ordinary-dev.cloudfunctions.net/homepageConfig')
         .then((response) => response.json())
-        .then(({documents}) => documents.map(({fields}) => ({
-          label: fields.label?.stringValue,
-          linkTo: fields.linkTo?.stringValue,
-          display: fields.display?.booleanValue,
-        })))
-        .then(setLinks);
-    fetch('https://firestore.googleapis.com/v1/projects/extra-ordinary-dev/databases/(default)/documents/live-video/default')
-        .then((response) => response.json())
-        .then(({fields}) => ({
-          title: fields.title?.stringValue,
-          embedId: fields.embedId?.stringValue,
-          caption: fields.caption?.stringValue,
-          display: fields.display?.booleanValue,
-        }))
-        .then(setLiveVideo);
-    fetch('https://firestore.googleapis.com/v1/projects/extra-ordinary-dev/databases/(default)/documents/currently-listening/default')
-        .then((response) => response.json())
-        .then(({fields}) => fields.display?.booleanValue && (
-          fetch('https://us-central1-extra-ordinary-dev.cloudfunctions.net/currentlyListening')
-              .then((response) => response.json())
-              .then(setCurrentlyPlaying)
-        ));
+        .then(({mediaPlayer, videoPlayer, socialLinks}) => {
+          setLinks(socialLinks);
+          setLiveVideo(videoPlayer);
+          if (mediaPlayer?.display) {
+            fetch('https://us-central1-extra-ordinary-dev.cloudfunctions.net/currentlyListening')
+                .then((response) => response.json())
+                .then(setCurrentlyPlaying);
+          }
+        });
   }, []);
 
   return (
