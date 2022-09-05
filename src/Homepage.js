@@ -20,6 +20,7 @@ const Button = styled.a`
 `;
 
 const YoutubeEmbed = React.lazy(() => import('./components/YoutubeEmbed'));
+const SpotifyEmbed = React.lazy(() => import('./components/SpotifyEmbed'));
 
 /**
  * Component for defining the header of the homepage
@@ -43,6 +44,7 @@ function Header() {
 function Body() {
   const [links, setLinks] = useState([]);
   const [liveVideo, setLiveVideo] = useState(null);
+  const [currentlyPlaying, setCurrentlyPlaying] = useState(null);
 
   useEffect(() => {
     fetch('https://firestore.googleapis.com/v1/projects/extra-ordinary-dev/databases/(default)/documents/social-links?orderBy=order')
@@ -62,6 +64,13 @@ function Body() {
           display: fields.display?.booleanValue,
         }))
         .then(setLiveVideo);
+    fetch('https://firestore.googleapis.com/v1/projects/extra-ordinary-dev/databases/(default)/documents/currently-listening/default')
+        .then((response) => response.json())
+        .then(({fields}) => fields.display?.booleanValue && (
+          fetch('https://us-central1-extra-ordinary-dev.cloudfunctions.net/currentlyListening')
+              .then((response) => response.json())
+              .then(setCurrentlyPlaying)
+        ));
   }, []);
 
   return (
@@ -74,6 +83,14 @@ function Body() {
           <a href="https://phish.com">Ph</a>eel free to check out the links below.
           As always, opinions are my own.
         </div>
+        {currentlyPlaying && (
+          <Suspense fallback={<div></div>}>
+            <SpotifyEmbed
+              embedId={currentlyPlaying.trackId}
+              lastPlayed={currentlyPlaying.lastPlayed}
+            />
+          </Suspense>
+        )}
         {liveVideo?.display && (
           <Suspense fallback={<div>Now streaming...</div>}>
             <YoutubeEmbed
