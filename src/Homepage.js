@@ -75,6 +75,7 @@ function Body() {
             <SpotifyEmbed
               embedId={currentlyPlaying.trackId}
               lastPlayed={currentlyPlaying.lastPlayed}
+              type={currentlyPlaying.type}
             />
           </Suspense>
         )}

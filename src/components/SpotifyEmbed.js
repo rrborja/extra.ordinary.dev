@@ -8,9 +8,13 @@ import timeSince from '../utils/timeSince';
  * @param {lastPlayed} title The ISO time since played
  * @return {JSX.Element} Spotify Embed iframe component
  */
-export default function SpotifyEmbed({embedId, lastPlayed}) {
+export default function SpotifyEmbed({embedId, lastPlayed, type}) {
   return embedId && (
     <div className='live-player-content'>
+      <h6>
+        {type === 'current' ? 'Currently' : 'Recently'} listening
+        since {timeSince(new Date(lastPlayed))} ago
+      </h6>
       <div className='music-player'>
         <iframe
           src={`https://open.spotify.com/embed/track/${embedId}?utm_source=generator&theme=0`}
@@ -28,7 +32,6 @@ export default function SpotifyEmbed({embedId, lastPlayed}) {
           `}>
         </iframe>
       </div>
-      <h6>Currently listening since {timeSince(new Date(lastPlayed))} ago</h6>
     </div>
   );
 }
@@ -36,4 +39,5 @@ export default function SpotifyEmbed({embedId, lastPlayed}) {
 SpotifyEmbed.propTypes = {
   embedId: PropTypes.string.isRequired,
   lastPlayed: PropTypes.string,
+  type: PropTypes.string.isRequired,
 };
