@@ -47,13 +47,13 @@ function Body() {
   const [currentlyPlaying, setCurrentlyPlaying] = useState(null);
 
   useEffect(() => {
-    fetch('https://us-central1-extra-ordinary-dev.cloudfunctions.net/homepageConfig')
+    fetch('https://super.extra.ordinary.dev/homepageConfig')
         .then((response) => response.json())
         .then(({mediaPlayer, videoPlayer, socialLinks}) => {
           setLinks(socialLinks);
           setLiveVideo(videoPlayer);
           if (mediaPlayer?.display) {
-            fetch('https://us-central1-extra-ordinary-dev.cloudfunctions.net/currentlyListening')
+            fetch('https://super.extra.ordinary.dev/currentlyListening')
                 .then((response) => response.json())
                 .then(setCurrentlyPlaying);
           }
