@@ -68,7 +68,7 @@ function Body() {
           <a href="https://www.google.com/maps/place/Philadelphia,+PA"> Philadelphia, PA</a>.
           I play the piano most of my free time.
           <a href="https://phish.com">Ph</a>eel free to check out the links below.
-          Opinions are my own. Go <a href="https://www.nfl.com/scores/">Eagles</a>!
+          Opinions are my own.
         </div>
         {currentlyPlaying && (
           <Suspense fallback={<div></div>}>
