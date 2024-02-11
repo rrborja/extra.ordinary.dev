@@ -2,7 +2,7 @@ version: 2.1
 executors:
   node:
     docker:
-      - image: circleci/node:12.13.0
+      - image: cimg/node:21.6.1
 commands:
   install:
     steps:
