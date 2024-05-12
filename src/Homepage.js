@@ -31,7 +31,6 @@ function Header() {
     <React.Fragment>
       <header>
         <h1>Ritchie Borja</h1>
-        <h5>he / him</h5>
       </header>
     </React.Fragment>
   );
