@@ -88,11 +88,11 @@ function Body() {
           </Suspense>
         )}
         <div className="social-links">
-          {links.map(({label, linkTo, display}, i) =>
+          {links.map(({label, link, display}, i) =>
             display && <Button
               key={`social-link-${i}`}
               onClick={() => analytics.socialLinkEvent(label)}
-              href={linkTo}
+              href={link}
             >
               {label}
             </Button>,
